@@ -32,7 +32,10 @@ public class ConsolePlugin: SmudPlugin {
     
     public func willEnterGameLoop() {
         //print("TextUserInterfacePlugin: willEnterGameLoop()")
+        print("Registering text user interface commands")
+        textUserInterface.registerCommands()
         
+        print("Activating console session")
         session.context = ChooseAccountContext(smud: smud)
         
         DispatchQueue.global(qos: .background).async {
