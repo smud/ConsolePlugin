@@ -21,17 +21,19 @@ public class ConsolePlugin: SmudPlugin {
     typealias T = ConsolePlugin
     
     let smud: Smud
-    let session = ConsoleSession()
+    let textUserInterface = TextUserInterface()
+    let session: ConsoleSession
     var inputMaximumLineLength = 512
     
     public init(smud: Smud) {
         self.smud = smud
+        session = ConsoleSession(textUserInterface: textUserInterface)
     }
     
     public func willEnterGameLoop() {
         //print("TextUserInterfacePlugin: willEnterGameLoop()")
         
-        session.context = ChooseAccountContext()
+        session.context = ChooseAccountContext(smud: smud)
         
         DispatchQueue.global(qos: .background).async {
             var eof = false
@@ -69,7 +71,7 @@ public class ConsolePlugin: SmudPlugin {
         do {
             action = try context.processResponse(args: args, session: session)
         } catch {
-            session.send(Config.internalErrorMessage)
+            session.send(smud.internalErrorMessage)
             print("Error in context \(context): \(error)")
             context.greet(session: session)
             return

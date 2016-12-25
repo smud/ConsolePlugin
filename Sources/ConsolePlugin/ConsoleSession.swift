@@ -15,6 +15,8 @@ import TextUserInterface
 import Smud
 
 class ConsoleSession: Session {
+    public var textUserInterface: TextUserInterface
+    
     public var context: SessionContext? {
         didSet {
             context?.greet(session: self)
@@ -24,6 +26,10 @@ class ConsoleSession: Session {
     public var account: Account?
     public var player: Player?
 
+    public init(textUserInterface: TextUserInterface) {
+        self.textUserInterface = textUserInterface
+    }
+    
     public func send(items: [Any], separator: String, terminator: String, isPrompt: Bool) {
         var first = true
         for item in items {
