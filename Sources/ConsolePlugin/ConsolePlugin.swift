@@ -67,8 +67,7 @@ public class ConsolePlugin: SmudPlugin {
         }
     
         guard let context = session.context else { return }
-        let scanner = Scanner(string: line)
-        let args = Arguments(scanner: scanner)
+        let args = Scanner(string: line)
         
         let action: ContextAction
         do {

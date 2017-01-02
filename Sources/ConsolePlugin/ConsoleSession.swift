@@ -24,7 +24,7 @@ class ConsoleSession: Session {
     }
     
     public var account: Account?
-    public var player: Player?
+    public var creature: Creature?
 
     public init(textUserInterface: TextUserInterface) {
         self.textUserInterface = textUserInterface
